@@ -1,10 +1,13 @@
-from enum import Enum
-
-
 class Book:
-    class BookStatus(Enum):
-        AVAILABLE = "в наличии"
-        ISSUED = "выдана"
+    """
+    Модель книги.
+
+    :param book_id: Уникальный идентификатор книги.
+    :param title: Название книги.
+    :param author: Автор книги.
+    :param year: Год издания книги.
+    :param status: Статус книги ("в наличии" или "выдана").
+    """
 
     def __init__(
         self,
@@ -12,17 +15,8 @@ class Book:
         title: str,
         author: str,
         year: int,
-        status: BookStatus = BookStatus.AVAILABLE,
+        status: str = "в наличии",
     ):
-        """
-        Модель книги.
-
-        :param book_id: Уникальный идентификатор книги.
-        :param title: Название книги.
-        :param author: Автор книги.
-        :param year: Год издания книги.
-        :param status: Статус книги ("в наличии" или "выдана").
-        """
         self.book_id = book_id
         self.title = title
         self.author = author
