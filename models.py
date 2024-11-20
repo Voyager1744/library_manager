@@ -6,12 +6,14 @@ class Book:
         AVAILABLE = "в наличии"
         ISSUED = "выдана"
 
-    def __init__(self,
-                 book_id: int,
-                 title: str,
-                 author: str,
-                 year: int,
-                 status: BookStatus = BookStatus.AVAILABLE):
+    def __init__(
+        self,
+        book_id: int,
+        title: str,
+        author: str,
+        year: int,
+        status: BookStatus = BookStatus.AVAILABLE,
+    ):
         """
         Модель книги.
 

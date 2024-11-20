@@ -27,10 +27,12 @@ def save_books(books: List[Book]) -> None:
     if not all(isinstance(book, Book) for book in books):
         raise ValueError("Все элементы в списке должны быть экземплярами класса Book.")
 
-    temp_file = tempfile.NamedTemporaryFile(delete=False, mode='w', encoding='utf-8')
+    temp_file = tempfile.NamedTemporaryFile(delete=False, mode="w", encoding="utf-8")
     try:
         with temp_file as f:
-            json.dump([book.to_dict() for book in books], f, ensure_ascii=False, indent=4)
+            json.dump(
+                [book.to_dict() for book in books], f, ensure_ascii=False, indent=4
+            )
         os.replace(temp_file.name, FILE_PATH)
     except Exception as e:
         os.remove(temp_file.name)
@@ -75,7 +77,11 @@ def search_books(books: List[Book], query: str, field: str) -> List[Book]:
     :return: Список найденных книг.
     """
     field_map = {"title": "title", "author": "author", "year": "year"}
-    return [book for book in books if query.lower() in str(getattr(book, field_map[field], "")).lower()]
+    return [
+        book
+        for book in books
+        if query.lower() in str(getattr(book, field_map[field], "")).lower()
+    ]
 
 
 def update_book_status(books: List[Book], book_id: int, status: str) -> bool:

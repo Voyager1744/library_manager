@@ -1,6 +1,14 @@
-from utils import (add_book, load_books, remove_book, save_books, search_books,
-                   update_book_status, validate_choice, validate_integer,
-                   validate_non_empty)
+from utils import (
+    add_book,
+    load_books,
+    remove_book,
+    save_books,
+    search_books,
+    update_book_status,
+    validate_choice,
+    validate_integer,
+    validate_non_empty,
+)
 
 
 def main():
@@ -61,7 +69,10 @@ def main():
             print(f"Ошибка при сохранении данных: {e}")
 
     def exit_action(books):
-        confirm_exit = validate_choice("Вы уверены, что хотите выйти? Все несохраненные изменения будут потеряны", ["да", "нет"])
+        confirm_exit = validate_choice(
+            "Вы уверены, что хотите выйти? Все несохраненные изменения будут потеряны",
+            ["да", "нет"],
+        )
         if confirm_exit == "да":
             save_books_action(books)
             print("Данные сохранены. Выход.")
@@ -75,7 +86,7 @@ def main():
         "4": show_books_action,
         "5": update_status_action,
         "6": save_books_action,
-        "0": exit_action
+        "0": exit_action,
     }
 
     while True:
