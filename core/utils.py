@@ -1,41 +1,36 @@
 import json
 import os
-import tempfile
 from typing import List
 
-from models import Book
+from core.models import Book
 
 FILE_PATH = "data/books.json"
 
 
 def load_books() -> List[Book]:
-    """
-    Загружает книги из JSON-файла.
-    """
+    """Загружает книги из JSON-файла."""
     try:
         with open(FILE_PATH, "r", encoding="utf-8-sig") as f:
             data = json.load(f)
             return [Book.from_dict(item) for item in data]
     except (FileNotFoundError, json.JSONDecodeError):
+        print("Файл с книгами не найден.")
         return []
 
 
 def save_books(books: List[Book]) -> None:
-    """
-    Сохраняет список книг в JSON-файл.
-    """
+    """Сохраняет список книг в JSON-файл."""
     if not all(isinstance(book, Book) for book in books):
         raise ValueError("Все элементы в списке должны быть экземплярами класса Book.")
 
-    temp_file = tempfile.NamedTemporaryFile(delete=False, mode="w", encoding="utf-8")
+    temp_file = 'data/temp_file.json'
     try:
-        with temp_file as f:
-            json.dump(
-                [book.to_dict() for book in books], f, ensure_ascii=False, indent=4
-            )
-        os.replace(temp_file.name, FILE_PATH)
+        with open(temp_file, "w", encoding="utf-8-sig") as f:
+            json.dump([book.to_dict() for book in books], f, ensure_ascii=False, indent=4)
+
+        os.replace(temp_file, FILE_PATH)
     except Exception as e:
-        os.remove(temp_file.name)
+        os.remove(temp_file)
         print(f"При сохранении книг произошла ошибка: {e}")
 
 

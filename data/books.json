@@ -1,23 +1,16 @@
-[
+﻿[
     {
         "book_id": 1,
-        "title": "тотото",
-        "author": "тол",
-        "year": 1234,
-        "status": "выдана"
-    },
-    {
-        "book_id": 3,
-        "title": "Война и Мир",
+        "title": "Война и мир",
         "author": "Толстой",
-        "year": 1944,
+        "year": 1868,
         "status": "в наличии"
     },
     {
-        "book_id": 4,
+        "book_id": 2,
         "title": "Сказки",
         "author": "Пушкин",
-        "year": 1830,
+        "year": 1833,
         "status": "в наличии"
     }
 ]

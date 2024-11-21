@@ -29,7 +29,13 @@ class Book:
         Returns:
             str: Строка, представляющая атрибуты объекта.
         """
-        return f"{self.title}, {self.author}, {self.year}, {self.status}"
+        return (
+            f"id: {self.book_id} |"
+            f" title: {self.title} |"
+            f" author: {self.author} |"
+            f" year: {self.year} |"
+            f" status: {self.status}"
+        )
 
     def to_dict(self) -> dict:
         """
