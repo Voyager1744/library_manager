@@ -43,14 +43,14 @@
 
 1.  Склонируйте репозиторий:
 
-        git clone https://github.com/yourusername/library-manager.git
+        git clone https://github.com/Voyager1744/library-manager.git
         cd library-manager
 
 2.  Создайте виртуальное окружение (опционально):
 ```bash
 python -m venv venv
-source venv/bin/activate # для Linux/MacOS
-venv\Scripts\activate      # для Windows
+source venv/bin/activate          # для Linux/MacOS
+       venv\Scripts\activate      # для Windows
 ```
 
 3.  Убедитесь, что у вас установлен Python версии 3.8 или выше.
@@ -66,19 +66,21 @@ python main.py
 **Структура проекта**
 ---------------------
 ```shell
-    library_manager/
-    │
-    ├── data/
-    │   └── books.json       # Файл для хранения данных
-    │
-    ├── models.py            # Классы и модели
-    ├── utils.py             # Утилиты для работы с данными
-    ├── main.py              # Основной скрипт
-    ├── README.md            # Документация проекта
-    ├── .gitignore           # Исключения для Git
-    └── tests/
-        └── test_library_manager.py  # Тесты
-
+library_manager
+       README.md
+    ├─ core
+    │  ├─ __init__.py
+    │  ├─ actions.py
+    │  ├─ models.py
+    │  └─ utils.py
+    ├─ data
+    │  ├─ __init__.py
+    │  └─ books.json
+    ├─ main.py
+    └─ tests
+       ├─ __init__.py
+       ├─ test_actions.py
+       └─ test_utils.py
 ```
 
 **Использование**
@@ -110,6 +112,7 @@ python main.py
 3. Найти книгу
 4. Показать все книги
 5. Изменить статус книги
+6. Сохранить изменения
 0. Выход
 
 Введите номер действия: 1
@@ -123,7 +126,8 @@ python main.py
 ### **2\. Показать все книги**
 ```text
 Список всех книг:
-{'book_id': 1, 'title': 'Война и мир', 'author': 'Лев Толстой', 'year': 1869, 'status': 'в наличии'}
+id: 1 | title: Война и мир | author: Толстой | year: 1868 | status: в наличии
+id: 2 | title: Сказки | author: Пушкин | year: 1833 | status: в наличии
 
 ```
 
