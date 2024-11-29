@@ -1,21 +1,10 @@
-from core.actions import (add_book_action, exit_action, remove_book_action,
-                          save_books_action, search_book_action,
-                          show_books_action, update_status_action)
-from core.utils import load_books
+from core.actions import Library
+from core.utils import (BookManager, validate_choice, validate_integer,
+                        validate_non_empty)
 
 
 def main() -> None:
-    books = load_books()
-
-    actions = {
-        "1": add_book_action,
-        "2": remove_book_action,
-        "3": search_book_action,
-        "4": show_books_action,
-        "5": update_status_action,
-        "6": save_books_action,
-        "0": exit_action,
-    }
+    manager = BookManager()
 
     while True:
         print("\nМеню:")
@@ -27,21 +16,35 @@ def main() -> None:
         print("6. Сохранить изменения")
         print("0. Выход")
 
-        try:
-            choice = input("Введите номер действия: ").strip()
-        except (EOFError, KeyboardInterrupt):
-            print("\nОшибка: ввод был прерван. Попробуйте снова.")
-            continue
+        choice = validate_choice(
+            "Выберите действие", ["1", "2", "3", "4", "5", "6", "0"]
+        )
 
-        action = actions.get(choice)
-        if action:
-            if choice == "0":
-                if action(books):
-                    break
-            else:
-                action(books)
-        else:
-            print("Ошибка: неверный ввод. Попробуйте снова.")
+        if choice == "1":
+            title = validate_non_empty("Введите название книги: ")
+            author = validate_non_empty("Введите автора книги: ")
+            year = validate_integer("Введите год издания книги: ")
+            manager.add_book(title, author, year)
+        elif choice == "2":
+            book_id = validate_integer("Введите ID книги для удаления: ")
+            manager.remove_book(book_id)
+        elif choice == "3":
+            field = validate_choice(
+                "Выберите поле для поиска", ["title", "author", "year"]
+            )
+            query = validate_non_empty("Введите запрос для поиска: ")
+            manager.search_books(query, field)
+        elif choice == "4":
+            manager.show_books()
+        elif choice == "5":
+            book_id = validate_integer("Введите ID книги: ")
+            status = validate_choice("Введите новый статус", ["в наличии", "выдана"])
+            manager.update_book_status(book_id, status)
+        elif choice == "6":
+            manager.save_books()
+        elif choice == "0":
+            print("Выход из программы.")
+            break
 
 
 if __name__ == "__main__":
